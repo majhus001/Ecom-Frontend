@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import Navbar from "../navbar/Navbar";
 import axios from "axios";
 import "./Orderdetails.css";
@@ -95,7 +95,7 @@ const Orderdetails = () => {
                 <h4>1. User Login ❌</h4>
                 <h5>
                   You are not logged in. Please log in to place an order.
-                  <button className="ord-login">Login</button>
+                  <Link to="/login"><button className="ord-login">Login</button></Link>
                 </h5>
               </div>
             )}
