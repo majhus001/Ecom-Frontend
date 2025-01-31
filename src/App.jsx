@@ -23,12 +23,11 @@ const App = () => {
       <Routes>
         {/* Set initial route */}
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/navbar" element={<Navbar />} />
         <Route path="/prodlist" element={<ProductList />} />
+        {/* <Route path="/homep" element={<HomePage />} /> */}
         <Route path="/home" element={<HomePage />} />
-        <Route path="/" element={<HomePage />} />
-        <Route path="/product" element={<ProductPage />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/adprod" element={<ProductAddPage />} />
         <Route path="/orderdet" element={<Orderdetails />} />
