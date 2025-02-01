@@ -1,18 +1,33 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './Home';
-import Product from './Product';
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-const App = () => {
-  return (
-    <Router>
-      <Routes>
-        {/* Set initial route */}
-        <Route path="/" element={<Home />} />
-        <Route path="/product" element={<Product />} />
-      </Routes>
-    </Router>
-  );
-};
+# Dependencies
+node_modules/
+frontend/node_modules/
+server/node_modules/
 
-export default App;
+# Build files
+dist/
+dist-ssr/
+frontend/dist/
+server/dist/
+
+# Local environment variables
+*.env
+frontend/.env
+server/.env
+
+# Editor directories and files
+.vscode/
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
