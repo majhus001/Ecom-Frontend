@@ -79,7 +79,7 @@ export default function Searchproducts() {
                   onClick={() => handleOnclknav(item)} // Pass item to the handler
                 >
                   <img
-                    src={`http://localhost:5000${item.image}`}
+                    src={item.image}
                     alt={item.name}
                   />
                   <div className="se-item-det">
