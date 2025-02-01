@@ -3,6 +3,7 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import Navbar from "../navbar/Navbar";
 import axios from "axios";
 import "./Orderdetails.css";
+import API_BASE_URL from "../../api";
 
 const Orderdetails = () => {
   const location = useLocation();
@@ -50,7 +51,7 @@ const Orderdetails = () => {
     };
   console.log("f b a")
     try {
-      const response = await axios.post("https://ecommerse-server-bpi5.onrender.com/api/orders/add", {
+      const response = await axios.post(`${API_BASE_URL}/api/orders/add`, {
       userId,
       cartItems,
       totalPrice: totalPrice + platformFee + deliveryFee - discount,

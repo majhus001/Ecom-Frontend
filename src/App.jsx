@@ -9,7 +9,6 @@ import Cart from './screens/Productscreens/Cart';
 import Navbar from './screens/navbar/Navbar';
 import Orderdetails from './screens/Order/Orderdetails';
 import Orderhistory from './screens/Order/Orderhistory';
-import Sidebar from './screens/sidebar/Sidebar';
 import ProfilePage from './screens/profiledetails/ProfilePage';
 import AdminHome from './Admin/homepage/AdminHome';
 import Adnavbar from './Admin/Adnavbar/Adnavbar';
@@ -31,7 +30,6 @@ const App = () => {
         <Route path="/adprod" element={<ProductAddPage />} />
         <Route path="/orderdet" element={<Orderdetails />} />
         <Route path="/myorders" element={<Orderhistory />} />
-        <Route path="/side" element={<Sidebar />} />
         <Route path="/profilepage" element={<ProfilePage />} />
         <Route path="/adhome" element={<AdminHome />} />
         <Route path="/adnavbar" element={<Adnavbar />} />

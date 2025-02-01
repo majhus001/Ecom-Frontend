@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./AdminHome.css"; // Updated CSS file
 import Adnavbar from "../Adnavbar/Adnavbar";
+import API_BASE_URL from "../../api";
 
 const AdminHome = () => {
   const location = useLocation();
@@ -26,11 +27,11 @@ const AdminHome = () => {
           clothProdRes,
           homeAppliRes,
         ] = await Promise.all([
-          axios.get("https://ecommerse-server-bpi5.onrender.com/api/admin/userdata"),
-          axios.get("https://ecommerse-server-bpi5.onrender.com/api/admin/pendingorders"),
-          axios.get("https://ecommerse-server-bpi5.onrender.com/api/admin/fetchmobiles"),
-          axios.get("https://ecommerse-server-bpi5.onrender.com/api/admin/fetchcloths"),
-          axios.get("https://ecommerse-server-bpi5.onrender.com/api/admin/fetchhomeappliance"),
+          axios.get(`${API_BASE_URL}/api/admin/userdata`),
+          axios.get(`${API_BASE_URL}/api/admin/pendingorders`),
+          axios.get(`${API_BASE_URL}/api/admin/fetchmobiles`),
+          axios.get(`${API_BASE_URL}/api/admin/fetchcloths`),
+          axios.get(`${API_BASE_URL}/api/admin/fetchhomeappliance`),
         ]);
 
         setUserData(userDataRes.data);
@@ -80,7 +81,7 @@ const AdminHome = () => {
           <div className="ad-sb-img-cont">
             {user?.image ? (
               <img
-                src={`http://localhost:5000${user.image}`}
+                src={user.image}
                 alt="admin"
                 className="ad-sb-img"
               />

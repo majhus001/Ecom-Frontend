@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../navbar/Navbar";
 import "./Searchproducts.css";
+import API_BASE_URL from "../../api";
 
 export default function Searchproducts() {
   const location = useLocation();

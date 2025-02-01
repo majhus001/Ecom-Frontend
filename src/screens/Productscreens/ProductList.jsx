@@ -3,6 +3,7 @@ import axios from "axios";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import "./ProductList.css";
 import Navbar from "../navbar/Navbar";
+import API_BASE_URL from "../../api";
 
 const ProductList = () => {
   const location = useLocation();
@@ -28,7 +29,7 @@ const ProductList = () => {
       try {
         console.log("f b a");
         const response = await axios.get(
-          `https://ecommerse-server-bpi5.onrender.com/api/cart/check`,
+          `${API_BASE_URL}/api/cart/check`,
           { params: { userId, itemId } }
         );
         console.log("f a a");
@@ -68,7 +69,7 @@ const ProductList = () => {
 
     try {
       const response = await axios.post(
-        "https://ecommerse-server-bpi5.onrender.com/api/cart/add",
+        `${API_BASE_URL}/api/cart/add`,
         productDetails
       );
 
@@ -109,7 +110,7 @@ const ProductList = () => {
           <div className="prod-img-btn-cont">
             <div className="productlist-image">
               {image ? (
-                <img src={`http://localhost:5000${image}`} alt={name} />
+                <img src={image} alt={name} />
               ) : (
                 <p>No image available</p>
               )}

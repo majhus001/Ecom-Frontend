@@ -3,15 +3,12 @@ import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Adminprofile.css";
 import Adnavbar from "../Adnavbar/Adnavbar";
+import API_BASE_URL from "../../api";
 
 const Adminprofile = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { userId, user, orders } = location.state || {};
-
-
-
-
 
   const [adminData, setAdminData] = useState({
     username: user?.username || "",
@@ -30,11 +27,15 @@ const Adminprofile = () => {
     setAdminData({ ...adminData, [name]: value });
   };
 
-    const handleImageChange = (e) => {
-    setAdminData({
-      ...userDetails,
-      image: URL.createObjectURL(e.target.files[0]),
-    });
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setAdminData({
+        ...adminData,
+        image: file, // Store the actual file for upload
+      });
+      setPreviewImage(URL.createObjectURL(file)); // Preview the selected image
+    }
   };
 
   const handleUpdate = async (e) => {
@@ -50,8 +51,9 @@ const Adminprofile = () => {
     }
 
     try {
+      console.log("hi");
       const response = await axios.put(
-        `https://ecommerse-server-bpi5.onrender.com/api/auth/update/${userId}`,
+        `${API_BASE_URL}/api/auth/update/${userId}`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
@@ -59,17 +61,11 @@ const Adminprofile = () => {
 
       if (response.data.success) {
         alert("Profile updated successfully!");
-
       }
     } catch (error) {
       console.error("Error updating profile:", error);
     }
   };
-
-
-
-
-
 
   const handleDashclk = () => {
     navigate("/adhome", { state: { userId, user } });
@@ -82,12 +78,10 @@ const Adminprofile = () => {
     navigate("/adorders", { state: { userId, user, orders } });
   };
 
-  
-  const handleProdclk = () =>{
-    console.log("hi")
+  const handleProdclk = () => {
+    console.log("hi");
     navigate("/adprod", { state: { userId, user, orders } });
-  
-  }
+  };
 
   const handleLogout = () => {
     navigate("/home");
@@ -102,11 +96,8 @@ const Adminprofile = () => {
         <div className="admin-sidebar">
           <div className="ad-sb-img-cont">
             {user?.image ? (
-              <img
-                src={`http://localhost:5000${user.image}`}
-                alt="admin"
-                className="ad-sb-img"
-              />
+              <img src={previewImage || adminData.image}  alt="admin" className="ad-sb-img" />
+      
             ) : (
               <div className="placeholder-img">No Image</div>
             )}
@@ -133,7 +124,7 @@ const Adminprofile = () => {
                 </button>
               </li>
               <li>
-                <button className="ad-sb-btns"  onClick={handleProdclk}>
+                <button className="ad-sb-btns" onClick={handleProdclk}>
                   Products
                 </button>
               </li>
@@ -160,20 +151,15 @@ const Adminprofile = () => {
                 <div className="profile-header">
                   <div className="profile-image">
                     {previewImage || user?.image ? (
-                      <img
-                        src={
-                          previewImage || `http://localhost:5000${user.image}`
-                        }
-                        alt="Admin"
-                      />
+                      <img src={previewImage || user.image} alt="Admin" />
                     ) : (
                       <div className="placeholder-img">No Image</div>
                     )}
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageChange}
-                      />
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                    />
                   </div>
                   <button
                     className="edit-btn"
@@ -226,7 +212,6 @@ const Adminprofile = () => {
                   />
                   {isEditing && (
                     <>
-                     
                       <button type="submit" className="update-btn">
                         Update Profile
                       </button>

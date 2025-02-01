@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Cart.css"; 
 import Navbar from "../navbar/Navbar";
+import API_BASE_URL from "../../api";
 
 export default function Cart() {
   const location = useLocation();
@@ -16,7 +17,7 @@ export default function Cart() {
       const fetchCartData = async () => {
         try {
           const response = await axios.get(
-            `https://ecommerse-server-bpi5.onrender.com/api/cart/fetch`,
+            `${API_BASE_URL}/api/cart/fetch`,
             {
               params: { userId },
             }
@@ -48,7 +49,7 @@ export default function Cart() {
     const updatedItem = updatedCartItems.find((item) => item._id === itemId);
     try {
       const response = await axios.put(
-        `https://ecommerse-server-bpi5.onrender.com/api/cart/update-quantity`,
+        `${API_BASE_URL}/api/cart/update-quantity`,
         { 
           userId: userId,
           itemId: updatedItem.itemId,
@@ -74,7 +75,7 @@ export default function Cart() {
   const handleRemoveItem = async (itemId) => {
     try {
       const response = await axios.delete(
-        `https://ecommerse-server-bpi5.onrender.com/api/cart/delete/${itemId}`
+        `${API_BASE_URL}/api/cart/delete/${itemId}`
       );
 
       if (response.status === 200) {
@@ -132,7 +133,7 @@ export default function Cart() {
                 {cartItems.map((item) => (
                   <div className="cart-item" key={item._id}>
                     <img
-                      src={`http://localhost:5000${item.image}`}
+                      src={item.image}
                       alt={item.name}
                       className="cart-item-img"
                     />

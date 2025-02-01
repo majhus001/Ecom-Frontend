@@ -5,6 +5,7 @@ import bannerImage from "../../assets/banner1.jpeg";
 import bannerImage1 from "../../assets/banner2.jpeg";
 import bannerImage2 from "../../assets/banner3.jpeg";
 import Navbar from "../navbar/Navbar";
+import API_BASE_URL from "../../api";
 
 const HomePage = () => {
   const location = useLocation();
@@ -39,13 +40,19 @@ const HomePage = () => {
       try {
         const [mobilesRes, clothingsRes, homeAppliancesRes] = await Promise.all(
           [
-            fetch("https://ecommerse-server-bpi5.onrender.com/api/mobiles/fetch"),
-            fetch("https://ecommerse-server-bpi5.onrender.com/api/clothings/fetch"),
-            fetch("https://ecommerse-server-bpi5.onrender.com/api/hoappliances/fetch"),
+            fetch(
+              `${API_BASE_URL}/api/mobiles/fetch`
+            ),
+            fetch(
+              `${API_BASE_URL}/api/clothings/fetch`
+            ),
+            fetch(
+              `${API_BASE_URL}/api/hoappliances/fetch`
+            ),
           ]
         );
 
-        console.log("home ")
+        console.log("home ");
 
         if (!mobilesRes.ok || !clothingsRes.ok || !homeAppliancesRes.ok) {
           throw new Error("Error fetching data from one or more endpoints.");
@@ -106,7 +113,6 @@ const HomePage = () => {
 
       <div className="main-container">
         <div className="content">
-          {/* Ad Banner */}
           <div className="banner-section">
             <div className="ad-banner">
               <img
@@ -167,7 +173,7 @@ const HomePage = () => {
                         }}
                       >
                         <img
-                          src={`http://localhost:5000${item.image}`}
+                          src={item.image}
                           alt={item.name}
                           className="product-image"
                         />
@@ -206,7 +212,7 @@ const HomePage = () => {
                         }}
                       >
                         <img
-                          src={`http://localhost:5000${item.image}`}
+                          src={item.image}
                           alt={item.name}
                           className="product-image"
                         />
@@ -245,8 +251,8 @@ const HomePage = () => {
                         }}
                       >
                         <img
-                          src={`http://localhost:5000${item.image}`}
-                          alt={item.name}
+                          src={item.image}
+                          alt={item.name} 
                           className="product-image"
                         />
                         <h5>{item.description}</h5>

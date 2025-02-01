@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./ProfilePage.css";
 import Navbar from "../navbar/Navbar";
+import API_BASE_URL from "../../api";
 
 const ProfilePage = () => {
   const location = useLocation();
@@ -26,7 +27,7 @@ const ProfilePage = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `https://ecommerse-server-bpi5.onrender.com/api/auth/fetch/${userId}`
+          `${API_BASE_URL}/api/auth/fetch/${userId}`
         );
         const fetchedData = response.data.data;
 
@@ -89,7 +90,7 @@ const ProfilePage = () => {
 
       // Send the form data to the server using Axios PUT request
       const response = await axios.put(
-        `https://ecommerse-server-bpi5.onrender.com/api/auth/update/${userId}`,
+        `${API_BASE_URL}/api/auth/update/${userId}`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
@@ -134,7 +135,7 @@ const ProfilePage = () => {
         <div className="user-prof-sidebar">
           <div className="ad-sb-img-cont">
             <img
-              src={`http://localhost:5000${userDetails.image}`}
+              src={userDetails.image}
               alt="admin"
               className="ad-sb-img"
             />
@@ -180,7 +181,7 @@ const ProfilePage = () => {
           <div className="profile-content">
             <div className="profile-image">
               <img
-                src={`http://localhost:5000${userDetails.image}`}
+                src={userDetails.image}
                 alt="Profile"
               />
               {isEditing && (

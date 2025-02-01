@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios"; // Importing axios for API requests
 import "./Adminorders.css";
 import Adnavbar from "../Adnavbar/Adnavbar";
+import API_BASE_URL from "../../api"
 
 const Adminorders = () => {
   const location = useLocation();
@@ -25,7 +26,7 @@ const Adminorders = () => {
     try {
       // Update the order status to "Accepted"
       const response = await axios.put(
-        "https://ecommerse-server-bpi5.onrender.com/api/admin/update-orders",
+        `${API_BASE_URL}/api/admin/update-orders`,
         {
           orderId,
           status: "Accepted", // You can customize the status as per your needs
@@ -94,7 +95,7 @@ const Adminorders = () => {
           <div className="ad-sb-img-cont">
             {user?.image ? (
               <img
-                src={`http://localhost:5000${user.image}`}
+                src={user.image}
                 alt="admin"
                 className="ad-sb-img"
               />
@@ -227,7 +228,7 @@ const Adminorders = () => {
                           <div key={index} className="order-item">
                             <div className="item-image">
                               <img
-                                src={`http://localhost:5000${item.image}`}
+                                src={item.image}
                                 alt={item.name}
                               />
                             </div>

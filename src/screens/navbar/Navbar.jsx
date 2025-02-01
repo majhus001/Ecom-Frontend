@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Navbar.css";
+import API_BASE_URL from "../../api";
 
 export default function Navbar({ userId, pageno = null }) {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ export default function Navbar({ userId, pageno = null }) {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `https://ecommerse-server-bpi5.onrender.com/api/auth/fetch/${userId}`
+          `${API_BASE_URL}/api/auth/fetch/${userId}`
         );
         const user = response.data.data;
         setUsername(user.username);
@@ -56,7 +57,7 @@ export default function Navbar({ userId, pageno = null }) {
         setSearchclothResults([]);
         setSearchhomeappResults([]);
       }
-    }, 500); // 500ms debounce delay
+    }, 500); 
   };
 
   // Fetch search results from different collections
@@ -64,13 +65,13 @@ export default function Navbar({ userId, pageno = null }) {
     try {
       const [mobileRes, clothRes, homeappliRes] = await Promise.all([
         axios.get(
-          `https://ecommerse-server-bpi5.onrender.com/api/mobiles/search/prod?query=${query}`
+          `${API_BASE_URL}/api/mobiles/search/prod?query=${query}`
         ),
         axios.get(
-          `https://ecommerse-server-bpi5.onrender.com/api/clothings/search/prod?query=${query}`
+          `${API_BASE_URL}/api/clothings/search/prod?query=${query}`
         ),
         axios.get(
-          `https://ecommerse-server-bpi5.onrender.com/api/hoappliances/search/prod?query=${query}`
+          `${API_BASE_URL}/api/hoappliances/search/prod?query=${query}`
         ),
       ]);
 
@@ -85,7 +86,7 @@ export default function Navbar({ userId, pageno = null }) {
   return (
     <nav className="hm-navbar">
       <div className="nav-logo">
-        <h2 onClick={() => navigate("/home")}>SHOPIQUE</h2>
+        <h2 onClick={() => navigate("/home",{state:{userId}})}>SHOPIQUE</h2>
       </div>
 
       {!isOrderPage ? (

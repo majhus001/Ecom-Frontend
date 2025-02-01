@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import "./Orderhistory.css";
+import API_BASE_URL from "../../api";
 import Navbar from "../navbar/Navbar";
 
 const Orderhistory = () => {
@@ -17,7 +18,7 @@ const Orderhistory = () => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          `https://ecommerse-server-bpi5.onrender.com/api/orders/fetch/${userId}`
+          `${API_BASE_URL}/api/orders/fetch/${userId}`
         );
         const result = response.data.data;
         if (result) {
@@ -99,7 +100,7 @@ const Orderhistory = () => {
                       <div key={index} className="order-item">
                         <div className="item-image">
                           <img
-                            src={`http://localhost:5000${item.image}`}
+                            src={item.image}
                             alt={item.name}
                           />
                         </div>

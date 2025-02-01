@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Productadd.css";
+import API_BASE_URL from "../api";
 
 const ProductAddPage = () => {
   
@@ -54,11 +55,11 @@ const ProductAddPage = () => {
 
     let apiEndpoint;
     if (product.category === "mobiles") {
-      apiEndpoint = "https://ecommerse-server-bpi5.onrender.com/api/mobiles/prod";
+      apiEndpoint = `${API_BASE_URL}/api/mobiles/prod`;
     } else if (product.category === "clothings") {
-      apiEndpoint = "https://ecommerse-server-bpi5.onrender.com/api/clothings/prod";
+      apiEndpoint = `${API_BASE_URL}/api/clothings/prod`;
     } else if (product.category === "homeappli") {
-      apiEndpoint = "https://ecommerse-server-bpi5.onrender.com/api/hoappliances/prod";
+      apiEndpoint = `${API_BASE_URL}/api/hoappliances/prod`;
     }
 
     try {
@@ -98,7 +99,7 @@ const ProductAddPage = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `https://ecommerse-server-bpi5.onrender.com/api/${product.category}/search?query=${query}`
+          `${API_BASE_URL}/api/${product.category}/search?query=${query}`
         );
         setSuggestions(response.data);
       } catch (error) {
@@ -121,7 +122,7 @@ const ProductAddPage = () => {
     try {
       setLoading(true);
       await axios.delete(
-        `https://ecommerse-server-bpi5.onrender.com/api/${product.category}/${product._id}`
+        `${API_BASE_URL}/api/${product.category}/${product._id}`
       );
       alert("Product deleted successfullyy!");
       setProduct({
@@ -168,7 +169,7 @@ const ProductAddPage = () => {
     }
     console.log("bfapi")
     console.log(product.category)
-    let apiEndpoint = `https://ecommerse-server-bpi5.onrender.com/api/${product.category}/update/${product._id}`;
+    let apiEndpoint = `${API_BASE_URL}/api/${product.category}/update/${product._id}`;
   
     try {
       setLoading(true);
@@ -308,7 +309,7 @@ const ProductAddPage = () => {
           <div className="ad-image-preview">
             <img
               className="ad-image-preview-img"
-              src={`http://localhost:5000${imagePreview}`}
+              src={imagePreview}
               alt="Product Preview"
             />
           </div>

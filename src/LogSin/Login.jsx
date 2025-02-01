@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link , useNavigate} from "react-router-dom";
+import API_BASE_URL from "../api";
+
  import "./Login.css"; // Import the CSS file
 
 const Login = () => {
@@ -21,7 +23,8 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://ecommerse-server-bpi5.onrender.com/api/auth/login/",
+        // "https://ecommerse-server-bpi5.onrender.com/api/auth/login/",
+        `${API_BASE_URL}/api/auth/login/`,
         formData
       );
       console.log("login success")

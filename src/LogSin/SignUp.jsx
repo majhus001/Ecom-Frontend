@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import "./Signup.css"; 
+import API_BASE_URL from "../api";
 
 const SignUp = () => {
+  
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -24,17 +27,26 @@ const SignUp = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://ecommerse-server-bpi5.onrender.com/api/auth/signup/",
+        `${API_BASE_URL}/api/auth/signup/`,
         formData
       );
+      console.log(response.data.message);
       if (response.data.success) {
         setMessage("Signup successful!");
+        setTimeout(()=>{
+          navigate("/login")
+        },2000);
       } else {
         setMessage(response.data.message || "Signup failed. Try again.");
       }
     } catch (error) {
       console.error("Error signing up:", error);
-      setMessage("An error occurred. Please try again.");
+      if (error.response && error.response.data) {
+        setMessage(error.response.data.message || "An error occurred. Please try again.");
+      } else {
+        // Handle network or other errors
+        setMessage("An error occurred. Please try again.");
+      }
     }
   };
 

@@ -100,7 +100,7 @@
   .item-image img {
     width: 100px;
     height: 100px;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 8px;
   }
   
@@ -118,6 +118,20 @@
     color: #555;
   }
   
+  .view-items-button{
+    height: 30px;
+    background-color: #007BFF;
+    color: #fff;
+    border: 1px solid #007BFF;
+    border-radius: 5px;
+  }
+
+  .view-items-button:hover {
+    background-color: #fff;
+    color: #007BFF;
+    border: 1px solid #007BFF;
+  }
+
   @media (max-width: 768px) {
     .order-history-container {
       width: 90%;
