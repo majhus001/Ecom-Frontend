@@ -28,10 +28,9 @@ const ProductList = () => {
     const checkIfItemInCart = async () => {
       try {
         console.log("f b a");
-        const response = await axios.get(
-          `${API_BASE_URL}/api/cart/check`,
-          { params: { userId, itemId } }
-        );
+        const response = await axios.get(`${API_BASE_URL}/api/cart/check`, {
+          params: { userId, itemId },
+        });
         console.log("f a a");
 
         if (response.data.exists) {
@@ -96,10 +95,23 @@ const ProductList = () => {
       alert("Please log in to Add products to Cart.");
       return;
     }
-    handleAddToCart();
-    navigate("/cart", { state: { userId: userId } })
-  }
-
+    // handleAddToCart();
+    navigate("/buynow", {
+      state: {
+        userId,
+        itemId,
+        name,
+        price,
+        brand,
+        quantity: 1,
+        description,
+        image,
+        category,
+        deliverytime,
+        rating,
+      },
+    });
+  };
 
   return (
     <div>

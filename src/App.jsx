@@ -19,6 +19,7 @@ import Orderdetails from './screens/Order/Orderdetails';
 import ProfilePage from './screens/profiledetails/ProfilePage';
 import Orderhistory from './screens/Order/Orderhistory';
 import Userhistory from './Admin/AdminUserman/Userhistory';
+import Buynow from './screens/Productscreens/Buynow';
 
 const App = () => {
   return (
@@ -42,6 +43,7 @@ const App = () => {
         <Route path="/seprodlist" element={<Searchproducts />} />
         <Route path="/userman" element={<UserManagement />} />
         <Route path="/aduserhis" element={<Userhistory />} />
+        <Route path="/buynow" element={<Buynow />} />
 
       </Routes>
     </Router>

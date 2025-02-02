@@ -12,11 +12,11 @@ const Orderdetails = () => {
   const {
     cartItems = [],
     userId,
-    totItems,
     totalPrice = 0,
     discount = 0,
     platformFee = 50,
     deliveryFee = 20,
+    path,
   } = location.state || {};
 
   // State to manage form inputs
@@ -78,8 +78,10 @@ const Orderdetails = () => {
 
       if (response.data) {
         const result = response.data;
-
         alert(result.message); 
+        if(path == "cart"){
+          await clearCart();
+        }
         navigate("/home", { state: { userId: userId } }); 
       } else {
         const error = await response.json();
@@ -90,6 +92,20 @@ const Orderdetails = () => {
       alert("An error occurred. Please try again.");
     }
   };
+
+  const clearCart = async () => {
+    try {
+      const response = await axios.delete(`${API_BASE_URL}/api/cart/clear/${userId}`);
+      if (response.data.success) {
+        console.log("Cart cleared successfully!");
+      } else {
+        console.error("Failed to clear cart.");
+      }
+    } catch (error) {
+      console.error("Error clearing cart:", error);
+    }
+  };
+  
 
   return (
     <div>
