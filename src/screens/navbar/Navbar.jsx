@@ -133,7 +133,7 @@ export default function Navbar({ userId, pageno = null }) {
                         }
                       >
                         <img
-                          src={`http://localhost:5000${product.image}`}
+                          src={product.image}
                           alt={product.name}
                         />
                         <div>

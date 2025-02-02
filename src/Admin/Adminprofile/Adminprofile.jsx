@@ -70,8 +70,13 @@ const Adminprofile = () => {
   const handleDashclk = () => {
     navigate("/adhome", { state: { userId, user } });
   };
+
   const handleprofileclk = () => {
     navigate("/adprof", { state: { userId, user } });
+  };
+
+  const handleUsemanclk = () => {
+    navigate("/userman", { state: { userId, user, orders  } });
   };
 
   const handleOrderclk = () => {
@@ -116,7 +121,9 @@ const Adminprofile = () => {
                 </button>
               </li>
               <li>
-                <button className="ad-sb-btns">User Management</button>
+                <button className="ad-sb-btns" onClick={handleUsemanclk}
+                >User Management
+                </button>
               </li>
               <li>
                 <button className="ad-sb-btns" onClick={handleOrderclk}>
@@ -137,7 +144,7 @@ const Adminprofile = () => {
 
         <div className="main-content">
           <header className="admin-header">
-            <h1>Welcome to the Admin Dashboard</h1>
+            <h1>Admin Profile</h1>
             <div className="admin-info">
               <button className="logout-btn" onClick={handleLogout}>
                 Logout

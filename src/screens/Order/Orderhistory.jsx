@@ -7,8 +7,7 @@ import Navbar from "../navbar/Navbar";
 
 const Orderhistory = () => {
   const location = useLocation();
-  const { userId } = location.state || {}; // Fallback if userId is undefined
-  console.log(userId);
+  const { userId } = location.state || {}; 
 
   const [orders, setOrders] = useState([]);
   const [visibleItems, setVisibleItems] = useState({}); // To track visibility of items for each order

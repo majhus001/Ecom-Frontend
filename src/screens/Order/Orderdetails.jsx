@@ -24,23 +24,39 @@ const Orderdetails = () => {
   const [mobileNumber, setMobileNumber] = useState("");
   const [deliveryAddress, setDeliveryAddress] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("Cash on Delivery");
+  const [userData, setUserDatas] = useState("");
 
   // State to manage step completion
   const [isMobileDone, setIsMobileDone] = useState(false);
   const [isAddressDone, setIsAddressDone] = useState(false);
 
   useEffect(() => {
-    if (userId) {
-      setIsLoggedIn(true);
-    }
+    const fetchUserData = async () => {
+      if (userId) {
+        setIsLoggedIn(true);
+        try {
+          const userDataRes = await axios.get(`${API_BASE_URL}/api/auth/fetch/${userId}`);
+          if (userDataRes.data.data) {
+            setUserDatas(userDataRes.data.data);
+            setMobileNumber(userDataRes.data.data.mobile || ""); // Set fetched mobile or keep it empty
+            setDeliveryAddress(userDataRes.data.data.address || ""); // Set fetched address or keep it empty
+          }
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+        }
+      }
+    };
+  
+    fetchUserData();
   }, [userId]);
+  
 
   const handlePlaceOrder = async () => {
     if (!mobileNumber || !deliveryAddress) {
       alert("Please fill in all the details.");
       return;
     }
-  
+
     const orderData = {
       userId,
       cartItems,
@@ -49,23 +65,22 @@ const Orderdetails = () => {
       deliveryAddress,
       paymentMethod,
     };
-  console.log("f b a")
+
     try {
       const response = await axios.post(`${API_BASE_URL}/api/orders/add`, {
-      userId,
-      cartItems,
-      totalPrice: totalPrice + platformFee + deliveryFee - discount,
-      mobileNumber,
-      deliveryAddress,
-      paymentMethod,
+        userId,
+        cartItems,
+        totalPrice: totalPrice + platformFee + deliveryFee - discount,
+        mobileNumber,
+        deliveryAddress,
+        paymentMethod,
       });
 
       if (response.data) {
         const result = response.data;
-        console.log(result.message)
-        console.log(result.orderId)
-        alert(result.message); // Success message from backend
-        navigate("/home", {state: {userId: userId}}); // Redirect to order confirmation page
+
+        alert(result.message); 
+        navigate("/home", { state: { userId: userId } }); 
       } else {
         const error = await response.json();
         alert(error.message || "Failed to place order.");
@@ -75,7 +90,6 @@ const Orderdetails = () => {
       alert("An error occurred. Please try again.");
     }
   };
-  
 
   return (
     <div>
@@ -96,7 +110,9 @@ const Orderdetails = () => {
                 <h4>1. User Login ❌</h4>
                 <h5>
                   You are not logged in. Please log in to place an order.
-                  <Link to="/login"><button className="ord-login">Login</button></Link>
+                  <Link to="/login">
+                    <button className="ord-login">Login</button>
+                  </Link>
                 </h5>
               </div>
             )}

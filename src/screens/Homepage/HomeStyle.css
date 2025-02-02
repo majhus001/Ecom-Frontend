@@ -87,7 +87,8 @@ a {
   color: #fff;
   border-radius: 8px; /* Slightly reduced radius for a cleaner look */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 1180px;
+  width: 100%;
+  margin: 10px;
 }
 
 .countdown-timer h3 {

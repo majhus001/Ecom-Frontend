@@ -59,6 +59,10 @@ const Adminorders = () => {
     navigate("/adprof", { state: { userId, user, orders } });
   };
 
+  const handleUsemanclk = () => {
+    navigate("/userman", { state: { userId, user, orders  } });
+  };
+
   const handleOrderclk = () => {
     navigate("/adorders", { state: { userId, user, orders } });
   };
@@ -117,7 +121,9 @@ const Adminorders = () => {
                 </button>
               </li>
               <li>
-                <button className="ad-sb-btns" >User Management</button>
+                <button className="ad-sb-btns" onClick={handleUsemanclk}>
+                  User Management
+                </button>
               </li>
               <li>
                 <button className="ad-sb-btns" onClick={handleOrderclk}>

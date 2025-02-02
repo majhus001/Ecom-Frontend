@@ -9,7 +9,7 @@ const AdminHome = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { userId, user } = location.state || {};
-
+console.log(user)
   const [userData, setUserData] = useState([]);
   const [orders, setOrders] = useState([]);
   const [pendingOrders, setUsersPendingOrder] = useState([]);
@@ -51,21 +51,23 @@ const AdminHome = () => {
   }, []);
 
   const handleDashclk = () => {
-    navigate("/adhome", { state: { userId, user, orders  } });
+    navigate("/adhome", { state: { userId, user, orders } });
   };
   const handleprofileclk = () => {
-    navigate("/adprof", { state: { userId, user, orders  } });
+    navigate("/adprof", { state: { userId, user, orders } });
+  };
+  const handleUsemanclk = () => {
+    navigate("/userman", { state: { userId, user, orders } });
   };
 
   const handleOrderclk = () => {
     navigate("/adorders", { state: { userId, user, orders } });
   };
 
-  const handleProdclk = () =>{
-    console.log("hi")
+  const handleProdclk = () => {
+    console.log("hi");
     navigate("/adprod", { state: { userId, user, orders } });
-  
-  }
+  };
 
   const handleLogout = () => {
     navigate("/home");
@@ -80,11 +82,7 @@ const AdminHome = () => {
         <div className="admin-sidebar">
           <div className="ad-sb-img-cont">
             {user?.image ? (
-              <img
-                src={user.image}
-                alt="admin"
-                className="ad-sb-img"
-              />
+              <img src={user.image} alt="admin" className="ad-sb-img" />
             ) : (
               <div className="placeholder-img">No Image</div>
             )}
@@ -96,14 +94,16 @@ const AdminHome = () => {
                 <button className="ad-sb-btns" onClick={handleDashclk}>
                   Dashboard
                 </button>
-              </li> 
+              </li>
               <li>
                 <button className="ad-sb-btns" onClick={handleprofileclk}>
                   Profile
                 </button>
               </li>
               <li>
-                <button className="ad-sb-btns">User Management</button>
+                <button className="ad-sb-btns" onClick={handleUsemanclk}>
+                  User Management
+                </button>
               </li>
               <li>
                 <button className="ad-sb-btns" onClick={handleOrderclk}>
@@ -124,7 +124,7 @@ const AdminHome = () => {
 
         <div className="main-content">
           <header className="admin-header">
-            <h1>Welcome to the Admin Dashboardddddddddd</h1>
+            <h1>Welcome to the Admin Dashboard</h1>
             <div className="admin-info">
               <button className="logout-btn" onClick={handleLogout}>
                 Logout
@@ -134,8 +134,10 @@ const AdminHome = () => {
 
           <div className="admin-dashboard">
             <div className="card">
-              <h3>Total Users</h3>
-              <p>{userData.length}</p>
+              <div onClick={handleUsemanclk}>
+                <h3>Total Users</h3>
+                <p>{userData.length}</p>
+              </div>
             </div>
             <div className="card">
               <h3>Total Products</h3>
@@ -143,7 +145,7 @@ const AdminHome = () => {
                 {mobileprod.length + clothprod.length + homeappliprod.length}
               </p>
             </div>
-            <div className="card">
+            <div className="card" onClick={handleOrderclk}>
               <h3>Pending Orders</h3>
               <p>{pendingOrders.length}</p>
             </div>

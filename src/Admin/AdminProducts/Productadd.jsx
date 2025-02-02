@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Productadd.css";
-import API_BASE_URL from "../api";
+import API_BASE_URL from "../../api";
 
 const ProductAddPage = () => {
   

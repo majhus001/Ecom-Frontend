@@ -27,7 +27,6 @@ const Adnavbar = ({ userId, user }) => {
       {isLoggedIn ? (
         <button
           className="nav-btns"
-          onClick={() => navigate("/adnavbar", { state: { userId } })}
           aria-label="Go to profile page"
         >
           {user.username}

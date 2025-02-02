@@ -92,14 +92,14 @@ const ProductList = () => {
   };
 
   const handleBuyNow = () => {
+    if (!userId) {
+      alert("Please log in to Add products to Cart.");
+      return;
+    }
     handleAddToCart();
     navigate("/cart", { state: { userId: userId } })
   }
 
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-    // Add search logic here
-  };
 
   return (
     <div>

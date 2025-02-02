@@ -42,7 +42,17 @@ const SignUp = () => {
     } catch (error) {
       console.error("Error signing up:", error);
       if (error.response && error.response.data) {
-        setMessage(error.response.data.message || "An error occurred. Please try again.");
+        if (error.response.data.message) {
+          setMessage(error.response.data.message);
+          setTimeout(() => {
+            setMessage("");
+          }, 3000);
+        } else {
+          setMessage("An error occurred. Please try again.");
+          setTimeout(() => {
+            setMessage("");
+          }, 3000);
+        }
       } else {
         // Handle network or other errors
         setMessage("An error occurred. Please try again.");
